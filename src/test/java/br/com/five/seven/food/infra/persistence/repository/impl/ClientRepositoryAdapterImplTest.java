@@ -52,6 +52,7 @@ class ClientRepositoryAdapterImplTest {
     @Test
     void saveWithNewClientShouldGenerateIdAndReturnSavedClient() {
         Client clientWithoutId = new Client();
+        clientWithoutId.setId("1");
         clientWithoutId.setName("Jane Doe");
         clientWithoutId.setCpf("98765432100");
         clientWithoutId.setEmail("jane@example.com");

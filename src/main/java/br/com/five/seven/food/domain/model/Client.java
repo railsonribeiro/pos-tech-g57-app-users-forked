@@ -2,7 +2,7 @@ package br.com.five.seven.food.domain.model;
 
 import br.com.five.seven.food.infra.utils.FoodUtils;
 
-public class Client {
+public class Client extends TimeAt {
 
     private String id;
     private String cpf;
@@ -21,7 +21,7 @@ public class Client {
     public Client() {
     }
 
-       public String getId() {
+    public String getId() {
         return id;
     }
 

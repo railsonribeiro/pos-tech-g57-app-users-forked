@@ -9,6 +9,7 @@ import jakarta.xml.bind.ValidationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -22,9 +23,11 @@ public class ClientService implements ClientUseCase {
         validateClient(client);
         var clientSearched = findByCpf(client.getCpf());
         if (clientSearched == null) {
+            client.setCreatedAt(LocalDateTime.now());
             return repository.save(client);
         }
         client.setId(clientSearched.getId());
+        client.setCreatedAt(clientSearched.getCreatedAt());
         return update(client.getCpf(), client);
     }
 
@@ -40,8 +43,17 @@ public class ClientService implements ClientUseCase {
 
     @Override
     public Client update(String cpf, Client client) throws ValidationException {
+
+        var clientSearched = findByCpf(client.getCpf());
+
+        if (clientSearched == null) {
+            throw new ValidationException("Client not found");
+        }
+
         validateClient(client);
         client.setCpf(FoodUtils.limparString(cpf));
+        client.setUpdatedAt(LocalDateTime.now());
+        client.setCreatedAt(clientSearched.getCreatedAt());
         return repository.save(client);
     }
 

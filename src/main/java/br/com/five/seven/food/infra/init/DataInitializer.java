@@ -53,6 +53,8 @@ public class DataInitializer implements CommandLineRunner {
                     name VARCHAR(100) NOT NULL,
                     email VARCHAR(255) NOT NULL,
                     phone VARCHAR(20),
+                    created_at TIMESTAMP NOT NULL,
+                    updated_at TIMESTAMP,
                     CONSTRAINT unique_cpf UNIQUE (cpf),
                     CONSTRAINT valid_email CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
                 )

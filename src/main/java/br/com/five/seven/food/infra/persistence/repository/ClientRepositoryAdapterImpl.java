@@ -4,12 +4,12 @@ import br.com.five.seven.food.domain.model.Client;
 import br.com.five.seven.food.domain.repository.IClientRepository;
 import br.com.five.seven.food.infra.persistence.entity.ClientEntity;
 import br.com.five.seven.food.rest.mapper.ClientMapper;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Repository
@@ -19,12 +19,9 @@ public class ClientRepositoryAdapterImpl implements IClientRepository {
     private final ClienteRepository clientRepository;
     private final ClientMapper clientMapper;
 
+    @Transactional
     @Override
     public Client save(Client client) {
-        if (client.getId() == null || client.getId().isEmpty()) {
-            client.setId(UUID.randomUUID().toString());
-        }
-
         ClientEntity clientEntity = new ClientEntity(client);
         ClientEntity savedEntity = clientRepository.save(clientEntity);
         return clientMapper.entityToDomain(savedEntity);

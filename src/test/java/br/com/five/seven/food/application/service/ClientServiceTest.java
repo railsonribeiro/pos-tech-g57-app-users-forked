@@ -62,7 +62,7 @@ class ClientServiceTest {
     }
 
     @Test
-    void createClientWithExistingClientShouldUpdateClient() throws ValidationException {
+    void withExistingClientShouldUpdateClient() throws ValidationException {
         try (MockedStatic<ValidationUtil> validationUtil = mockStatic(ValidationUtil.class);
              MockedStatic<FoodUtils> foodUtils = mockStatic(FoodUtils.class)) {
 
@@ -77,8 +77,7 @@ class ClientServiceTest {
             when(clientRepository.findByCpf("12345678901")).thenReturn(existingClient);
             when(clientRepository.save(any(Client.class))).thenReturn(validClient);
 
-            Client result = clientService.createClient(validClient);
-
+            Client result = clientService.update("12345678901", validClient);
             assertNotNull(result);
             assertEquals("1", validClient.getId());
             verify(clientRepository).findByCpf("12345678901");
@@ -194,6 +193,8 @@ class ClientServiceTest {
             foodUtils.when(() -> FoodUtils.limparString(anyString())).thenReturn("12345678901");
 
             when(clientRepository.save(any(Client.class))).thenReturn(validClient);
+
+            when(clientRepository.findByCpf("12345678901")).thenReturn(validClient);
 
             Client result = clientService.update("12345678901", validClient);
 
