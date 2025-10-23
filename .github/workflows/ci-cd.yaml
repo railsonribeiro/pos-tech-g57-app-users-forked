@@ -31,11 +31,11 @@ on:
         required: true
         default: true
         type: boolean
-      run_deploy:
-        description: 'Executar Deploy'
-        required: true
-        default: true
-        type: boolean
+      #run_deploy:
+        #description: 'Executar Deploy'
+        #required: true
+        #default: true
+        #type: boolean
 
 jobs:
   load-config:
