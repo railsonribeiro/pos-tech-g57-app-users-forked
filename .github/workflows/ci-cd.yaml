@@ -76,11 +76,11 @@ jobs:
 
       - name: Display Outputs
         run: |
-          echo "App Name: ${APP_NAME}" >> "$GITHUB_OUTPUT"
-          echo "DockerHub Username: ${DOCKERHUB_USERNAME}" >> "$GITHUB_OUTPUT"
-          echo "Cluster Name: ${CLUSTER_NAME}" >> "$GITHUB_OUTPUT"
-          echo "Region AWS Deploy: ${REGION_AWS_DEPLOY}" >> "$GITHUB_OUTPUT"
-          echo "Domain Name: ${DOMAIN_NAME}" >> "$GITHUB_OUTPUT"
+          echo "app_name=${APP_NAME}" >> "$GITHUB_OUTPUT"
+          echo "dockerhub_username=${DOCKERHUB_USERNAME}" >> "$GITHUB_OUTPUT"
+          echo "cluster_name=${CLUSTER_NAME}" >> "$GITHUB_OUTPUT"
+          echo "region_aws_deploy=${REGION_AWS_DEPLOY}" >> "$GITHUB_OUTPUT"
+          echo "domain_name=${DOMAIN_NAME}" >> "$GITHUB_OUTPUT"
 
   debug-outputs:
     name: Debug Outputs
