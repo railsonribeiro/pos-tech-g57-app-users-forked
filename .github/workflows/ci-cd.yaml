@@ -54,16 +54,15 @@ jobs:
       - name: Load pipe.yml
         id: load
         run: |
-            if [ ! -f pipe.yml ]; then
-              echo "pipe.yml not found" >&2
-              exit 1
-            fi
-            while IFS=':' read -r raw_key raw_value; do
-              key=$(echo "$raw_key" | xargs | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9_]/_/g')
-              value=$(echo "$raw_value" | xargs)
-              echo "${key}=${value}" >> "$GITHUB_ENV"
-              echo "::set-output name=${key}::${value}"
-            done < pipe.yml
+          if [ ! -f pipe.yml ]; then
+            echo "pipe.yml not found" >&2
+            exit 1
+          fi
+          while IFS=':' read -r raw_key raw_value; do
+            key=$(echo "$raw_key" | xargs | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9_]/_/g')
+            value=$(echo "$raw_value" | xargs)
+            echo "${key}=${value}" >> "$GITHUB_ENV"
+          done < pipe.yml
 
       - name: Set Default Values
         run: |
@@ -94,6 +93,10 @@ jobs:
       run_build: ${{ github.event.inputs.run_build }}
       run_unit_test: ${{ github.event.inputs.run_unit_test }}
       app_name: ${{ needs.load-config.outputs.app_name }}
+      dockerhub_username: ${{ needs.load-config.outputs.dockerhub_username }}
+      cluster_name: ${{ needs.load-config.outputs.cluster_name }}
+      region_aws_deploy: ${{ needs.load-config.outputs.region_aws_deploy }}
+      domain_name: ${{ needs.load-config.outputs.domain_name }}
 
   gates-workflow:
     needs: load-config
