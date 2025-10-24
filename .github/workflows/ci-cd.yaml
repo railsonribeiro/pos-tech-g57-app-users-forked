@@ -31,7 +31,7 @@ on:
         required: true
         default: true
         type: boolean
-      #run_deploy:
+        #run_deploy:
         #description: 'Executar Deploy'
         #required: true
         #default: true
@@ -58,10 +58,18 @@ jobs:
             value=$(echo "$value" | xargs)
             echo "$key=$value" >> $GITHUB_OUTPUT
           done < pipe.yml
+  variables-config:
+    name: Variables
+    runs-on: ubuntu-latest
+    steps:
       - name: Teste
         id: teste
         run: |
-          echo githuboutput ${{GITHUB_OUTPUT}}
+          echo app_name ${{needs.load-config.outputs.app_name}}
+          echo dockerhub_username ${{needs.load-config.outputs.dockerhub_username}}
+          echo cluster_name ${{needs.load-config.outputs.cluster_name}}
+          echo region_aws_deploy ${{needs.load-config.outputs.region_aws_deploy}}
+          echo domain_name ${{needs.load-config.outputs.domain_name}}
 
   build-workflow:
     needs: load-config
