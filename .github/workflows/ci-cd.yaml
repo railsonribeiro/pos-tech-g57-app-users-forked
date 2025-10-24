@@ -37,7 +37,7 @@ jobs:
     name: Load Config
     runs-on: ubuntu-latest
     outputs:
-      app_name: ${{ env.APP_NAME }}
+      app_name: ${{ steps.load.outputs.app_name }}
       dockerhub_username: ${{ env.DOCKERHUB_USERNAME }}
       cluster_name: ${{ env.CLUSTER_NAME }}
       region_aws_deploy: ${{ env.REGION_AWS_DEPLOY }}
@@ -86,7 +86,7 @@ jobs:
     steps:
       - name: Exibir valores propagados
         run: |
-          echo "App Name: ${{ env.APP_NAME }}"
+          echo "App Name: ${{ steps.load.outputs.app_name }}
           echo "DockerHub Username: ${{ needs.load-config.outputs.dockerhub_username }}"
           echo "Cluster Name: ${{ needs.load-config.outputs.cluster_name }}"
           echo "Region AWS Deploy: ${{ needs.load-config.outputs.region_aws_deploy }}"
