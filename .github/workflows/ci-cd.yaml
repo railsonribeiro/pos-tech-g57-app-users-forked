@@ -86,7 +86,7 @@ jobs:
     steps:
       - name: Exibir valores propagados
         run: |
-          echo "App Name: ${{ steps.load.outputs.app_name }}
+          echo "App Name: ${{ steps.load.outputs.app_name }}"
           echo "DockerHub Username: ${{ needs.load-config.outputs.dockerhub_username }}"
           echo "Cluster Name: ${{ needs.load-config.outputs.cluster_name }}"
           echo "Region AWS Deploy: ${{ needs.load-config.outputs.region_aws_deploy }}"
