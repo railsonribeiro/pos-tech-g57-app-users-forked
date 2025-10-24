@@ -60,7 +60,7 @@ jobs:
 
   build-workflow:
     needs: load-config
-    uses: rachelkozlowsky/nested-reusable-java-maven-eks/.github/workflows/build.yml
+    uses: rachelkozlowsky/nested-reusable-java-maven-eks/.github/workflows/build.yml@develop
     with:
       run_validation_and_lint: ${{ github.event.inputs.run_validation_and_lint }}
       run_build: ${{ github.event.inputs.run_build }}
@@ -69,13 +69,13 @@ jobs:
 
   gates-workflow:
     needs: load-config
-    uses: rachelkozlowsky/nested-reusable-java-maven-eks/.github/workflows/gates.yml
+    uses: rachelkozlowsky/nested-reusable-java-maven-eks/.github/workflows/gates.yml@develop
     with:
       run_sonar_scan: ${{ github.event.inputs.run_sonar_scan }}
 
   deploy-workflow:
     needs: load-config
-    uses: rachelkozlowsky/nested-reusable-java-maven-eks/.github/workflows/deploy.yml
+    uses: rachelkozlowsky/nested-reusable-java-maven-eks/.github/workflows/deploy.yml@develop
     with:
       run_docker_build_and_push: ${{ github.event.inputs.run_docker_build_and_push }}
       run_deploy: ${{ github.event.inputs.run_deploy }}
