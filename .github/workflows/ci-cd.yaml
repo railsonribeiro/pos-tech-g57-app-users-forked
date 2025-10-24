@@ -41,7 +41,7 @@ jobs:
     name: Load Config
     runs-on: ubuntu-latest
     outputs:
-      app_name: ${{ steps.load.outputs.APP_NAME }}
+      app_name: ${{ steps.load.outputs.app_name }}
       dockerhub_username: ${{ steps.load.outputs.DOCKERHUB_USERNAME }}
       cluster_name: ${{ steps.load.outputs.CLUSTER_NAME }}
       region_aws_deploy: ${{ steps.load.outputs.REGION_AWS_DEPLOY }}
