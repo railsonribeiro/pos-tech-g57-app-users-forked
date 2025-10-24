@@ -67,19 +67,24 @@ jobs:
 
       - name: Set Default Values
         run: |
-          echo "Setting default values for missing variables..."
-          echo "DOCKERHUB_USERNAME=${{ steps.load.outputs.dockerhub_username || 'postechf57' }}" >> $GITHUB_ENV
-          echo "CLUSTER_NAME=${{ steps.load.outputs.cluster_name || 'eks-postech-g57' }}" >> $GITHUB_ENV
-          echo "REGION_AWS_DEPLOY=${{ steps.load.outputs.region_aws_deploy || 'us-east-1' }}" >> $GITHUB_ENV
-          echo "DOMAIN_NAME=${{ steps.load.outputs.domain_name || 'pos-tech-g57-food-app.com.br' }}" >> $GITHUB_ENV
+            echo "Setting default values for missing variables..."
+            echo "DOCKERHUB_USERNAME=${{ steps.load.outputs.dockerhub_username || 'postechf57' }}" >> $GITHUB_ENV
+            echo "CLUSTER_NAME=${{ steps.load.outputs.cluster_name || 'eks-postech-g57' }}" >> $GITHUB_ENV
+            echo "REGION_AWS_DEPLOY=${{ steps.load.outputs.region_aws_deploy || 'us-east-1' }}" >> $GITHUB_ENV
+            echo "DOMAIN_NAME=${{ steps.load.outputs.domain_name || 'pos-tech-g57-food-app.com.br' }}" >> $GITHUB_ENV
 
       - name: Display Outputs
+        env:
+          DOCKERHUB_USERNAME: ${{ env.DOCKERHUB_USERNAME }}
+          CLUSTER_NAME: ${{ env.CLUSTER_NAME }}
+          REGION_AWS_DEPLOY: ${{ env.REGION_AWS_DEPLOY }}
+          DOMAIN_NAME: ${{ env.DOMAIN_NAME }}
         run: |
-          echo "App Name: ${{ steps.load.outputs.app_name }}"
-          echo "DockerHub Username: ${{ steps.load.outputs.dockerhub_username }}"
-          echo "Cluster Name: ${{ steps.load.outputs.cluster_name }}"
-          echo "Region AWS Deploy: ${{ steps.load.outputs.region_aws_deploy }}"
-          echo "Domain Name: ${{ steps.load.outputs.domain_name }}"
+            echo "App Name: ${{ steps.load.outputs.app_name }}"
+            echo "DockerHub Username: $DOCKERHUB_USERNAME"
+            echo "Cluster Name: $CLUSTER_NAME"
+            echo "Region AWS Deploy: $REGION_AWS_DEPLOY"
+            echo "Domain Name: $DOMAIN_NAME"
 
   build-workflow:
     needs: load-config
