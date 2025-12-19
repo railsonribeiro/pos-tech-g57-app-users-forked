@@ -1,6 +1,6 @@
 spring:
   config:
-    import: aws-secretsmanager:production/rds/postgres-v3
+    import: aws-secretsmanager:production/rds/postgres-v4
   cloud:
     aws:
       region:
